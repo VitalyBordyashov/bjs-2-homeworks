@@ -18,11 +18,11 @@ function solveEquation(a, b, c) {
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
   if (isNaN(parseInt(percent))) {
-    return ("Параметр <Процентная ставка> содержит неправильное значение <" + percent + ">");
+    return ('Параметр "Процентная ставка" содержит неправильное значение "' + percent + '"');
   } else if (isNaN(parseInt(contribution))) {
-    return ("Параметр <Начальный взнос> содержит неправильное значение <" + contribution + ">");
+    return ('Параметр "Начальный взнос" содержит неправильное значение "' + contribution + '"');
   } else if (isNaN(parseInt(amount))) {
-    return ("Параметр <Общая стоимость> содержит неправильное значение <" + amount + ">");
+    return ('Параметр "Общая стоимость" содержит неправильное значение "' + amount + '"');
   }
   let today = new Date();
   let n = Math.round((date - today) / (30.5 * 60 * 60 * 24 * 1000));
