@@ -9,19 +9,17 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMark = function (mark) {
-  if (this.marks === undefined) { 
-    this.marks = [mark];
-  } else {
-    this.marks.push(mark)
-  }
+  if (this.marks === undefined) {
+    this.marks = [];
+    }
+    this.marks.push(mark);
 }
 
-Student.prototype.addMarks = function (mark1,mark2,mark3,...rest) {
+Student.prototype.addMarks = function (...rest) {
   if (this.marks === undefined) {  
-    this.marks = [mark1,mark2,mark3,...rest];
-  } else {
-    this.marks.push(mark1,mark2,mark3,...rest)
+    this.marks = [];
   }
+    this.marks.push(...rest)
 }
 
 Student.prototype.getAverage = function () {
