@@ -4,18 +4,21 @@ class PrintEditionItem {
       this.name = name;
       this.releaseDate = releaseDate;
       this.pagesCount = pagesCount;
-      this.state = 100;
+      this._state = 100;
       this.type = null;
   }
-  get () {
-    return this.state;
+  get state() {
+    return this._state;
   }
-  set (value) {
+  set state (value) {
     if (value < 0) {
-      this.state = 0; 
+      this._state = 0; 
     } else if (value > 100) {
-      this.state = 100;
+      this._state = 100;
     } 
+    else {
+      this._state = value;
+    }
   }
   
   fix() {
@@ -71,50 +74,69 @@ class Library {
   }
  
   findBookBy(type, value) {
-    return this.books.find(Element =>  Element[type] === value);
+    let elem = this.books.find(Element =>  Element[type] === value);
+    if (elem === undefined) {
+      return null;
+    } 
+      return elem;
 }
- 
+
   giveBookByName(bookName) {
-      let obj = this.books.filter(Element =>  Element.name != bookName);
-      return this.books = obj;
-}
+    let obj = this.books.find(Element =>  Element.name === bookName);
+    let index = this.books.findIndex(Element =>  Element.name === bookName);
+    if (index === -1) {
+        return null;
+    } 
+    this.books.splice(index,1);
+    return obj;
+  }
 }
  
 class Student {
   constructor (name) {
     this.name = name;
-    this.performance = [];
+    this.performance = {};
   }
    
   addMark(mark, setSubject) {
-    let obj = [] 
-    let marks = [];
-    if (mark < 1 && mark > 5) {
-    return "Ошибка, оценка должна быть числом от 1 до 5";
+    if (!this.performance[setSubject]) {
+      this.performance[setSubject] = [];
     }
-    marks.push(mark);
-    obj[setSubject] = marks;
-    this.performance.push(obj); 
+    if (mark < 1 || mark > 5) {
+      console.log ("Ошибка, оценка должна быть числом от 1 до 5");
+      return "Ошибка, оценка должна быть числом от 1 до 5";
+    }
+    this.performance[setSubject].push(mark);
   }
 
 
  
   getAverageBySubject(setSubject) {
-    for (let item of this.performance) {
-      if (item.setSubject === setSubject) {
-        let result = this.marks.reduce((sum, item) => sum + item);
-        return (result / this.marks.length);
-      }
+    if (!this.performance[setSubject]) {
+      console.log ("Несуществующий предмет");
+      return "Несуществующий предмет";
     }
- 
+    let a =  this.performance[setSubject];
+    let result = a.reduce((sum, item) => sum + item);
+    let averageSubject = result / a.length;
+    console.log('Средний балл по предмету ' + setSubject + ' ' + averageSubject);
+    return averageSubject;
   }
  
   getAverage() {
-    for (let item of this.performance) {
-      return getAverageBySubject(item) / this.item.length;
-      
+    let sum = 0;
+    for (let idx in this.performance) {
+      console.log(idx);  
+      let b = this.getAverageBySubject(idx);
+      console.log(b);
+      sum = sum + b;
+      console.log(sum);
+      }
+      let generalAverage = sum / Object.values(this.performance).length;
+      console.log('Средний балл по всем предметам ' + generalAverage);
+      return generalAverage;
     }
-  }
+  
  
   exclude(reason) {
     this.excluded = reason;
@@ -122,7 +144,7 @@ class Student {
  
 }
 const student = new Student("Олег Никифоров");
-student.addMark(5, "algebra");
+student.addMark(7, "algebra");
 student.addMark(5, "algebra");
 student.addMark(5, "geometry");
 student.addMark(4, "geometry");
