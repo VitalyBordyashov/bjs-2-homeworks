@@ -120,8 +120,7 @@ class Student {
  
   getAverage() {
     let allRatings = Object.values(this.performance);
-    console.log(allRatings); 
-    allRatings[0].concat(allRatings[1], ...rest);
+    console.log(allRatings);  
  
     let result = allRatings.reduce((sum, item) => sum + item);
     console.log(result);
