@@ -40,19 +40,15 @@ let getTriangle = (a, b, c) => {
         return new Triangle(a, b, c);
     }
     catch (err) {
-        const triangle = {
-            side1: a,
-            side2: b,
-            side3: c,
+        return {
             getPerimeter() {
-                throw new Error ("Ошибка! Треугольник не существует");
+                return "Ошибка! Треугольник не существует";
             },
             getArea() {
-                throw new Error ("Ошибка! Треугольник не существует");
+                return "Ошибка! Треугольник не существует";
             }
 
         }
-        return triangle;
     }
 }
 
